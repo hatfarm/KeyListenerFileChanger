@@ -4,7 +4,7 @@ This project is a global key listener that allows you to map specific keys to cr
 
 ## Prerequisites
 
-- .NET Framework 4.7.2 or higher
+- .NET 8.0 or higher
 
 ## Getting Started
 
