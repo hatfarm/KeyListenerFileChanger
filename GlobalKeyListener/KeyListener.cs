@@ -1,5 +1,5 @@
 ﻿// <copyright file="KeyListener.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// Licensed under the MIT License. See the LICENSE file for more details.
 // </copyright>
 
 namespace GlobalKeyListener;
