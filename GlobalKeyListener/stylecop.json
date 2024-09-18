@@ -1,0 +1,41 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+  "settings": {
+    "documentationRules": {
+      "companyName": "Open Source Project Name",
+      "copyrightText": "Licensed under the MIT License. See the LICENSE file for more details."
+    },
+    "namingRules": {
+      "allowCommonHungarianPrefixes": false,
+      "allowedHungarianPrefixes": []
+    },
+    "orderingRules": {
+      "usingDirectivesPlacement": "outsideNamespace"
+    },
+    "readabilityRules": {
+      "allowConsecutiveUsings": false,
+      "allowMultipleBlankLines": false,
+      "allowTrailingWhitespace": false,
+      "allowXmlDocumentationComments": true,
+      "allowXmlDocumentationCommentsOnSeparateLines": true,
+      "allowXmlDocumentationCommentsWithEmptyDescription": false,
+      "allowXmlDocumentationCommentsWithInvalidContent": false,
+      "allowXmlDocumentationCommentsWithInvalidIndentation": false,
+      "allowXmlDocumentationCommentsWithMissingContent": false,
+      "allowXmlDocumentationCommentsWithMissingIndentation": false,
+      "allowXmlDocumentationCommentsWithMissingParamTags": false,
+      "allowXmlDocumentationCommentsWithMissingReturnsTag": false,
+      "allowXmlDocumentationCommentsWithMissingSummaryTag": false,
+      "allowXmlDocumentationCommentsWithMissingTypeParamTags": false,
+      "allowXmlDocumentationCommentsWithMissingTypeParamsTags": false,
+      "allowXmlDocumentationCommentsWithMissingValueTags": false,
+      "allowXmlDocumentationCommentsWithObsoleteContent": false,
+      "allowXmlDocumentationCommentsWithSpellingErrors": false,
+      "allowXmlDocumentationCommentsWithWrongIndentation": false,
+      "allowXmlDocumentationCommentsWithWrongSpacing": false
+    },
+    "maintainabilityRules": {
+      "maxStatementsPerLine": 1
+    }
+  }
+}
