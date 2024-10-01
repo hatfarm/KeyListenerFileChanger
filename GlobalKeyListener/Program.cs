@@ -5,47 +5,63 @@
 namespace GlobalKeyLister;
 
 using GlobalKeyListener;
+using GlobalKeyListener.Config;
+using GlobalKeyListener.Serialization;
+using GlobalKeyListener.Window;
+using System.IO;
+using System.Text.Json;
+using System.Windows.Forms;
 
 /// <summary>
 /// The main program class.
 /// </summary>
-public class Program
+public static class Program
 {
     /// <summary>
     /// The main function, this is where execution starts.
     /// </summary>
+    /// <param name="args">The command line arguments.</param>
     [STAThread]
-    public static void Main()
+    public static void Main(string[] args)
     {
-        Application.EnableVisualStyles();
-        Application.SetCompatibleTextRenderingDefault(false);
+        try {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
-        // This is where you'd put the path to the folder that will hold your files.
-        FileWriter fileWriter = new ("C:\\Users\\vossc\\OneDrive\\Desktop\\testingStuff");
+            GlobalKeyListenerConfig config = LoadConfig();
 
-        KeyListener keyListener = new (fileWriter, GetButtonToFileMap());
+            FileWriter fileWriter = new(config.FileCreationDirectory);
 
-        LowLevelKeyboardHook kbh = new ();
-        kbh.OnKeyPressed += keyListener.OnKeyPressed;
-        kbh.OnKeyUnpressed += keyListener.OnKeyUnPressed;
-        kbh.HookKeyboard();
+            // Show the status window
+            StatusWindow statusWindow = new StatusWindow(fileWriter);
+            statusWindow.Show();
 
-        Application.Run();
+            KeyListener keyListener = new(fileWriter, config, statusWindow);
 
-        kbh.UnHookKeyboard();
+            LowLevelKeyboardHook kbh = new();
+            kbh.OnKeyPressed += keyListener.OnKeyPressed;
+            kbh.HookKeyboard();
+
+            Application.Run();
+
+            kbh.UnHookKeyboard();
+        } catch (Exception e)
+        {
+            MessageBox.Show($"An error occurred: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 
-    /// <summary>
-    /// Setup the button mapping to the files we'll save to.
-    /// </summary>
-    /// <returns>The dictionary of what we want.</returns>
-    private static Dictionary<Keys, string> GetButtonToFileMap()
+    public static void ReloadConfig(KeyListener keyListener, StatusWindow statusWindow)
     {
-        Dictionary<Keys, string> buttonToFileMap = new ()
-        {
-            [Keys.R] = "reloadaction.txt",
-            [Keys.V] = "somethingelse.txt",
-        };
-        return buttonToFileMap;
+        GlobalKeyListenerConfig config = LoadConfig();
+        keyListener.UpdateConfig(config);
+    }
+
+    private static GlobalKeyListenerConfig LoadConfig()
+    {
+        string jsonFilePath = "./appsettings.json";
+        string jsonContent = File.ReadAllText(jsonFilePath);
+
+        return JsonSerializer.Deserialize<GlobalKeyListenerConfig>(jsonContent)!;
     }
 }

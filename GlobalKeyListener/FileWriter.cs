@@ -13,10 +13,10 @@ using System.Text;
 /// It merely changes the contents of the file to a new hash.
 /// We do this so that we can detect when the file has been written to.
 /// </summary>
-internal class FileWriter
+public class FileWriter
 {
     // This is the folder that our files will be saved to.
-    private readonly string fileSaveRoot = "your/folder/here";
+    public string FileSaveRoot { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="FileWriter"/> class.
@@ -24,7 +24,7 @@ internal class FileWriter
     /// <param name="fileSaveRoot">The root directory we would like to save our files to.</param>
     internal FileWriter(string fileSaveRoot)
     {
-        this.fileSaveRoot = fileSaveRoot;
+        this.FileSaveRoot = fileSaveRoot;
     }
 
     /// <summary>
@@ -33,7 +33,7 @@ internal class FileWriter
     /// <param name="fileName">The name of the file (without the full path).</param>
     public void WriteFileWithNewContents(string fileName)
     {
-        string filePath = Path.Combine(this.fileSaveRoot, fileName);
+        string filePath = Path.Combine(this.FileSaveRoot, fileName);
 
         // This is the text that we will be writing to the file.
         var result = default(byte[]);
